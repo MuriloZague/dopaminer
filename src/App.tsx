@@ -5,6 +5,7 @@ import Button from "./components/Button";
 import DVDLogo from "./components/DVDLogo";
 import Shop from "./components/Shop";
 import Subway from "./components/SubwaySurfers";
+import Footer from "./components/Footer";
 
 function App() {
 
@@ -48,7 +49,7 @@ function App() {
         ))}
       </svg>
 
-      <div className="relative z-10 flex justify-center items-center h-full">
+      <div className="relative z-10 flex justify-center items-center h-[97%]">
         <div className="transform -translate-y-10">
           <div className="">
             <Button />
@@ -61,6 +62,7 @@ function App() {
       <div className={subChecker ? '' : 'hidden'}>
         <Subway/>
       </div>
+      <Footer />
     </section>
   );
 }
