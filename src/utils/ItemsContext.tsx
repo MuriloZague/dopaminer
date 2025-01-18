@@ -26,7 +26,7 @@ const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
 export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<Item[]>([
     { id: 1, name: 'Logo de DVD', img: DVD, desc: 'A cada colisão você ganha 1 estímulo', cost: 5, unlocked: false, quantity: 0 },
-    { id: 2, name: 'Duplo Clique', img: EMOJI, desc: 'Seus cliques agora dão o dobro de estímulos!', cost: 10, unlocked: false, quantity: -2 },
+    { id: 2, name: 'Duplos Cliques', img: EMOJI, desc: 'Seus cliques agora dão o dobro de estímulos!', cost: 10, unlocked: false, quantity: -2 },
     { id: 3, name: 'Feed Infinito', img: FEED, desc: 'aaa', cost: 20, unlocked: false, quantity: 0 },
   ]);
 
