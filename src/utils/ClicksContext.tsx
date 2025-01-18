@@ -12,7 +12,7 @@ export const ClicksProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [clicks, setClicks] = useState<number>(0);
 
   const addClick = () => {
-    setClicks((prev) => prev + 1);
+    setClicks((prev) => prev + 1); // Normalmente, aumenta um clique
   };
 
   const reduceClicks = (cost: number): boolean => {

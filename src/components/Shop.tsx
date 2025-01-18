@@ -27,9 +27,9 @@ export default function Shop() {
   return (
 
     <div className="flex flex-col items-center justify-center">
-      <div className="flex flex-row items-center gap-4 ">
+      <div className="flex flex-row items-center gap-3 ">
         {items.map((item) =>
-          item.unlocked && item.quantity !== -1 ? (  // Verifica se o item não está bloqueado e se a quantity não é -1
+          item.unlocked && item.quantity !== -1 ? (
             <div
               className='relative transition-all hover:-translate-y-[0.2rem] cursor-pointer'
               key={item.id}
@@ -38,7 +38,6 @@ export default function Shop() {
             >
               <img
                 className='p-2 bg-white rounded-2xl border border-black h-20'
-                key={item.id}
                 src={item.img}
                 width={80}
                 onClick={() => handlePurchase(item.id, item.cost)}
@@ -55,17 +54,8 @@ export default function Shop() {
                 </div>
               )}
             </div>
-          )
-            :
-            (
-              <div className='relative transition-all hover:-translate-y-[0.2rem] opacity-0'>
-                <img
-                  className='p-1 rounded-2xl border border-black h-20'
-                  key={item.id}
-                  src={item.img}
-                  width={80}
-                  onClick={() => handlePurchase(item.id, item.cost)} />
-              </div>
+          ):(
+            <div className='h-20'></div>
             )
         )}
       </div>

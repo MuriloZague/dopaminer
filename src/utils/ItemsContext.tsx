@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { useClicks } from './ClicksContext';
 
-import DVD from '../assets/dvd-logo.svg'
-import EMOJI from '../assets/emojianimado.png'
-import FEED from '../assets/feedinfito.png'
+import DVD from '../assets/dvd-logo.svg';
+import EMOJI from '../assets/emojianimado.png';
+import FEED from '../assets/feedinfito.png';
 
 interface Item {
   id: number;
@@ -90,6 +90,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 export const useItems = () => {
   const context = useContext(ItemsContext);
   if (!context) {
+    console.error('useItems must be used within an ItemsProvider');
     throw new Error('useItems must be used within an ItemsProvider');
   }
   return context;
