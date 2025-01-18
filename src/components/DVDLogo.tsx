@@ -1,5 +1,11 @@
 import { Component } from "react";
 
+interface DVDLogoProps {
+  width: number;
+  height: number;
+  addClick: () => void; // Adicionando a função addClick como uma propriedade
+}
+
 interface DVDLogoState {
   x: number;
   y: number;
@@ -8,11 +14,6 @@ interface DVDLogoState {
   r: number;
   g: number;
   b: number;
-}
-
-interface DVDLogoProps {
-  width: number;
-  height: number;
 }
 
 const widthDVDLogo = 200;
@@ -68,24 +69,26 @@ class DVDLogo extends Component<DVDLogoProps, DVDLogoState> {
 
   moveDVDLogo() {
     const { x, y, xSpeed, ySpeed } = this.state;
-    const { width, height } = this.props;
+    const { width, height, addClick } = this.props;
 
     let newX = x + xSpeed;
     let newY = y + ySpeed;
     let newXSpeed = xSpeed;
     let newYSpeed = ySpeed;
 
+    //Colisões
     if (newX + widthDVDLogo >= width || newX <= 0) {
       newXSpeed = -xSpeed;
       this.setRandomColors();
+      addClick();
     }
 
     if (newY + heightDVDLogo >= height || newY <= 0) {
       newYSpeed = -ySpeed;
       this.setRandomColors();
+      addClick();
     }
 
-    // Prevenindo valores fora do limite
     newX = Math.max(0, Math.min(newX, width - widthDVDLogo));
     newY = Math.max(0, Math.min(newY, height - heightDVDLogo));
 
