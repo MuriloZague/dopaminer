@@ -18,9 +18,9 @@ export default function Shop() {
 
   const handlePurchase = (itemId: number, cost: number) => {
     if (buyItem(itemId, cost) && reduceClicks(cost)) {
-      console.log('comprado');
+      //compra
     } else {
-      console.log('sem clicks');
+      //sem cliques
     }
   };
 
