@@ -12,7 +12,7 @@ interface Item {
   desc: string;
   cost: number;
   unlocked: boolean;
-  quantity: number; // Agora cada item tem uma quantidade
+  quantity: number; // Cada item tem uma quantidade
 }
 
 interface ItemsContextType {
@@ -30,7 +30,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     { id: 3, name: 'Feed Infinito', img: FEED, desc: 'aaa', cost: 20, unlocked: false, quantity: 0 },
   ]);
 
-  const { clicks } = useClicks();
+  const { clicks, setMultiplier } = useClicks();
 
   const unlockItem = (itemId: number) => {
     setItems((prevItems) =>
@@ -44,11 +44,27 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const item = items.find((item) => item.id === itemId);
 
     if (item) {
-      if (item.id === 2 && item.quantity >= -1) {
-        return false;
+      // Lógica para "Duplos Cliques"
+      if (item.id === 2 && item.quantity === -2) {
+        if (clicks >= item.cost) {
+          // Configura o multiplicador de cliques
+          setMultiplier(2);
+
+          // Atualiza o estado do item
+          setItems((prevItems) =>
+            prevItems.map((i) =>
+              i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
+            )
+          );
+
+          return true;
+        }
+
+        return false; // Não há cliques suficientes
       }
 
-      if (item.id === 1 && clicks >= cost) {
+      // Lógica para outros itens
+      if (clicks >= cost && item.unlocked) {
         setItems((prevItems) =>
           prevItems.map((i) =>
             i.id === itemId
@@ -56,28 +72,12 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
               : i
           )
         );
-        return true;
-      }
 
-      if (item.id === 2 && clicks >= item.cost && item.quantity === -2) {
-        unlockItem(itemId);
-        setItems((prevItems) =>
-          prevItems.map((i) =>
-            i.id === itemId
-              ? { ...i, unlocked: false, quantity: -1 }
-              : i
-          )
-        );
-        return true;
-      }
-
-      if (clicks >= item.cost && item.unlocked) {
-        unlockItem(itemId);
         return true;
       }
     }
 
-    return false;
+    return false; // Não conseguiu comprar o item
   };
 
   return (
