@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useClicks } from "./utils/ClicksContext";
+import { useItems } from "./utils/ItemsContext";
 import Button from "./components/Button";
 import DVDLogo from "./components/DVDLogo";
 import Shop from "./components/Shop";
@@ -7,6 +8,7 @@ import Shop from "./components/Shop";
 function App() {
 
   const { addClick } = useClicks();
+  const { items } = useItems();
 
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
@@ -26,11 +28,21 @@ function App() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const dvdLogo = items.find((item) => item.id === 1);
+  const quantityDVD = dvdLogo?.quantity || 0
+
   return (
     <section className="relative h-screen w-screen">
-
+      
       <svg width={windowSize.width} height={windowSize.height} className="absolute inset-0 -z-10 w-full h-full">
-        <DVDLogo width={windowSize.width} addClick={addClick} height={windowSize.height} />
+      {Array.from({ length: quantityDVD }).map((_, index) => (
+          <DVDLogo
+            key={index} // Adicionei a key para cada elemento gerado
+            width={windowSize.width}
+            addClick={addClick}
+            height={windowSize.height}
+          />
+        ))}
       </svg>
 
       <div className="relative z-10 flex justify-center items-center h-full">

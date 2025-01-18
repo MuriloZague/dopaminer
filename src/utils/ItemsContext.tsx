@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { useClicks } from './ClicksContext';
 
 import DVD from '../assets/dvd-logo.svg';
-import EMOJI from '../assets/emojianimado.png';
+import DOUBLE from '../assets/duploclique.png';
 import FEED from '../assets/feedinfito.png';
 
 interface Item {
@@ -26,8 +26,8 @@ const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
 export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<Item[]>([
     { id: 1, name: 'Logo de DVD', img: DVD, desc: 'A cada colisão você ganha 1 estímulo', cost: 5, unlocked: false, quantity: 0 },
-    { id: 2, name: 'Duplos Cliques', img: EMOJI, desc: 'Seus cliques agora dão o dobro de estímulos!', cost: 10, unlocked: false, quantity: -2 },
-    { id: 3, name: 'Feed Infinito', img: FEED, desc: 'aaa', cost: 20, unlocked: false, quantity: 0 },
+    { id: 2, name: 'Duplos Cliques', img: DOUBLE, desc: 'Seus cliques agora dão o dobro de estímulos!', cost: 10, unlocked: false, quantity: -2 },
+    { id: 3, name: 'Botão melhorado', img: FEED, desc: 'Deixe seu botão mais bonito ( ͡° ͜ʖ ͡°)', cost: 20, unlocked: false, quantity: -2 },
   ]);
 
   const { clicks, setMultiplier } = useClicks();
@@ -50,6 +50,20 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         if (clicks >= item.cost) {
           // Configura o multiplicador de cliques
           setMultiplier(2);
+          // Atualiza o estado do item
+          setItems((prevItems) =>
+            prevItems.map((i) =>
+              i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
+            )
+          );
+          return true;
+        }
+        return false; // Não há cliques suficientes
+      }
+
+      // Lógica para "Botão Melhorado"
+      if (item.id === 3 && item.quantity === -2) {
+        if (clicks >= item.cost) {
           // Atualiza o estado do item
           setItems((prevItems) =>
             prevItems.map((i) =>

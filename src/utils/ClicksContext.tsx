@@ -4,6 +4,7 @@ interface ClickContextType {
   clicks: number;
   multiplier: number; // Novo estado para o multiplicador
   addClick: () => void;
+  manualClick: () => void;
   reduceClicks: (cost: number) => boolean;
   setMultiplier: (value: number) => void; // Para configurar o multiplicador
 }
@@ -15,8 +16,12 @@ export const ClicksProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [multiplier, setMultiplierState] = useState<number>(1); // Valor inicial do multiplicador é 1
 
   const addClick = () => {
-    setClicks((prev) => prev + multiplier); // Adiciona cliques multiplicados
+    setClicks((prev) => prev + 1); // Adiciona cliques multiplicados
   };
+
+  const manualClick = () => {
+    setClicks((prev) => prev + multiplier);
+  }
 
   const reduceClicks = (cost: number): boolean => {
     if (clicks >= cost) {
@@ -32,7 +37,7 @@ export const ClicksProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
   return (
     <ClicksContext.Provider
-      value={{ clicks, multiplier, addClick, reduceClicks, setMultiplier }}
+      value={{ clicks, multiplier, addClick, manualClick, reduceClicks, setMultiplier }}
     >
       {children}
     </ClicksContext.Provider>

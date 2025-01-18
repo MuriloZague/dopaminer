@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   margin: 0px;
   padding: 0px;
   font-family: sans-serif;
@@ -17,5 +17,37 @@
 }
 
 .desc-upgrade {
-  box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, .2);
+}
+
+.neo-button {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #dcd6dc;
+  width: 8rem;
+  height: 4rem;
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 10px 10px 20px rgba(187, 186, 187, 0.6), -10px -10px 30px 10px rgba(255, 255, 255, 0.5);
+  transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.neo-button button:hover {
+  cursor: pointer;
+  background-color: #dcd6dc;
+}
+
+.neo-button button {
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  outline: none;
+}
+
+.neo-button:active {
+  box-shadow: inset 10px 10px 10px rgba(187, 186, 187, 0.4), inset -10px -10px 12px rgba(255, 255, 255, 0.6);
+  transform: scale(0.9);
 }
