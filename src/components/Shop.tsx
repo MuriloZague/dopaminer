@@ -9,7 +9,6 @@ export default function Shop() {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null); // Estado para controlar qual item está sendo "hovered"
 
   useEffect(() => {
-    
     items.forEach((item) => {
       if (clicks >= item.cost && !item.unlocked) {
         unlockItem(item.id);
@@ -25,7 +24,8 @@ export default function Shop() {
     }
   };
 
-  return (
+
+return (
 
     <div className="flex flex-col items-center justify-center">
       <div className="flex flex-row items-center gap-4 ">
@@ -39,7 +39,7 @@ export default function Shop() {
                 onMouseLeave={() => setHoveredItem(null)}
                 >
                 <img 
-                  className='p-2 rounded-2xl border border-black h-20' 
+                  className='p-2 bg-white rounded-2xl border border-black h-20' 
                   key={item.id} 
                   src={item.img} 
                   width={80}
