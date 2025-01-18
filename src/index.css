@@ -51,3 +51,11 @@
   box-shadow: inset 10px 10px 10px rgba(187, 186, 187, 0.4), inset -10px -10px 12px rgba(255, 255, 255, 0.6);
   transform: scale(0.9);
 }
+
+.buttonTrans {
+  transition: .3s ease-out,font-size .3s ease-out,transform .1s ease-out
+}
+
+.upgradeTolltip {
+  transition: opacity .1s linear
+}

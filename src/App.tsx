@@ -33,11 +33,10 @@ function App() {
 
   return (
     <section className="relative h-screen w-screen">
-      
       <svg width={windowSize.width} height={windowSize.height} className="absolute inset-0 -z-10 w-full h-full">
       {Array.from({ length: quantityDVD }).map((_, index) => (
           <DVDLogo
-            key={index} // Adicionei a key para cada elemento gerado
+            key={index}
             width={windowSize.width}
             addClick={addClick}
             height={windowSize.height}
@@ -47,8 +46,10 @@ function App() {
 
       <div className="relative z-10 flex justify-center items-center h-full">
         <div className="transform -translate-y-10">
-          <Button />
-          <div className="mt-5">
+          <div className="">
+            <Button />
+          </div>
+          <div className="h-20">
             <Shop />
           </div>
         </div>

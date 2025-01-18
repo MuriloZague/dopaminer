@@ -11,11 +11,11 @@ export default function Button() {
 
     return (
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mb-10">
 
                 <div className={upgradeCheker ? "flex-button-container" : ""}>
                     <div className={upgradeCheker ? "neo-button" : ""} onClick={manualClick}>
-                        <button className="bg-[#f0f0f0] border hover:bg-[#ddd] border-[#777] p-1 px-4">
+                        <button className="bg-[#f0f0f0] border buttonTrans hover:bg-[#ddd] border-[#777] p-1 px-4">
                             <a className="inter-tight text-[1.35rem]">Clique</a>
                         </button>
                     </div>
@@ -31,10 +31,6 @@ export default function Button() {
                         {clicks} estímulos
                     </p>
                 }
-
-            </div>
-            <div>
-                <button></button>
             </div>
         </div>
 
