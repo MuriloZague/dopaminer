@@ -36,7 +36,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     );
   };
 
-  const buyItem = (itemId: number, cost: number): boolean => {
+  const buyItem = (itemId: number, _cost: number): boolean => {
     const item = items.find((item) => item.id === itemId);
     if (item && item.unlocked) {
       return true; // Compra bem-sucedida (lógica de subtração de cliques será implementada no contexto de cliques)
