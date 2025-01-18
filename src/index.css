@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+.inter-tight {
+  color: black;
+  font-family: "Inter Tight", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.desc-upgrade {
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
+}
