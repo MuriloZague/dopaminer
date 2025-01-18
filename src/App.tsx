@@ -4,6 +4,7 @@ import { useItems } from "./utils/ItemsContext";
 import Button from "./components/Button";
 import DVDLogo from "./components/DVDLogo";
 import Shop from "./components/Shop";
+import Subway from "./components/SubwaySurfers";
 
 function App() {
 
@@ -31,6 +32,9 @@ function App() {
   const dvdLogo = items.find((item) => item.id === 1);
   const quantityDVD = dvdLogo?.quantity || 0
 
+  const subWay = items.find((item) => item.id === 5);
+  const subChecker = subWay?.quantity === -1
+
   return (
     <section className="relative h-screen w-screen">
       <svg width={windowSize.width} height={windowSize.height} className="absolute inset-0 -z-10 w-full h-full">
@@ -53,6 +57,9 @@ function App() {
             <Shop />
           </div>
         </div>
+      </div>
+      <div className={subChecker ? '' : 'hidden'}>
+        <Subway/>
       </div>
     </section>
   );

@@ -39,10 +39,10 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     { id: 2, name: 'Duplos Cliques', img: DOUBLE, desc: 'Seus cliques agora dão o dobro de estímulos!', cost: 10, unlocked: false, quantity: -2 },
     { id: 3, name: 'Botão melhorado', img: BUTTON, desc: 'Deixe seu botão mais bonito ( ͡° ͜ʖ ͡°)', cost: 20, unlocked: false, quantity: -2 },
     { id: 4, name: 'Ícone do Site', img: FAVICON, desc: 'Adicione um Favicon no seu site!', cost: 30, unlocked: false, quantity: -2},
-    { id: 5, name: 'Subway Surfers', img: SUBWAY, desc: '+5 estímulos por segundo!', cost: 100, unlocked: false, quantity: -2},
+    { id: 5, name: 'Subway Surfers', img: SUBWAY, desc: '+5 estímulos por segundo!', cost: 60, unlocked: false, quantity: -2},
   ]);
 
-  const { clicks, setMultiplier } = useClicks();
+  const { clicks, setMultiplier, startAutoClicks } = useClicks();
 
   const unlockItem = (itemId: number) => {
     setItems((prevItems) =>
@@ -87,6 +87,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       // Lógica Subway Surfers
       if (item.id === 5 && item.quantity === -2) {
         if (clicks >= item.cost) {
+          startAutoClicks(5)
           setItems((prevItems) =>
             prevItems.map((i) =>
               i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
