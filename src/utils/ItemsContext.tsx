@@ -44,35 +44,41 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const item = items.find((item) => item.id === itemId);
 
     if (item) {
+
       // Lógica para "Duplos Cliques"
       if (item.id === 2 && item.quantity === -2) {
         if (clicks >= item.cost) {
           // Configura o multiplicador de cliques
           setMultiplier(2);
-
           // Atualiza o estado do item
           setItems((prevItems) =>
             prevItems.map((i) =>
               i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
             )
           );
-
           return true;
         }
-
         return false; // Não há cliques suficientes
       }
 
-      // Lógica para outros itens
-      if (clicks >= cost && item.unlocked) {
-        setItems((prevItems) =>
-          prevItems.map((i) =>
-            i.id === itemId
-              ? { ...i, quantity: i.quantity + 1, cost: i.cost * 3 }
-              : i
-          )
-        );
+      // Items que aumentam preço
+      if (item.id === 1) {
+        if (clicks >= cost && item.unlocked) {
+          setItems((prevItems) =>
+            prevItems.map((i) =>
+              i.id === itemId
+                ? { ...i, quantity: i.quantity + 1, cost: i.cost * 3 }
+                : i
+            )
+          );
 
+          return true;
+        }
+      }
+
+      // Items sem lógica
+      if (clicks >= item.cost && item.unlocked) {
+        unlockItem(itemId);
         return true;
       }
     }

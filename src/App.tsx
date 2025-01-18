@@ -29,18 +29,14 @@ function App() {
   return (
     <section className="relative h-screen w-screen">
 
-      <svg
-        width={windowSize.width}
-        height={windowSize.height}
-        className="absolute inset-0 -z-10 w-full h-full"
-      >
+      <svg width={windowSize.width} height={windowSize.height} className="absolute inset-0 -z-10 w-full h-full">
         <DVDLogo width={windowSize.width} addClick={addClick} height={windowSize.height} />
       </svg>
 
       <div className="relative z-10 flex justify-center items-center h-full">
         <div className="transform -translate-y-10">
           <Button />
-          <div className="mt-8">
+          <div className="mt-5">
             <Shop />
           </div>
         </div>
