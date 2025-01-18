@@ -45,7 +45,7 @@ return (
                   onClick={() => handlePurchase(item.id, item.cost)}
                   />
                 {hoveredItem === item.id && (
-                <div className="flex flex-col absolute w-48 -translate-x-14 text-center text-black p-2 desc-upgrade rounded-md mt-2 text-sm">
+                <div className="flex flex-col bg-white absolute w-48 -translate-x-14 text-center text-black p-2 desc-upgrade rounded-md mt-2 text-sm">
                   <a className='text-base font-semibold'>{item.name}</a>
                   <a className='text-base text-[#6d6d6d]'>{item.desc}</a>
                   {clicks < item.cost ? (
