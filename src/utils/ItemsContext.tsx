@@ -29,7 +29,7 @@ const changeFavicon = () => {
   const link = document.querySelector("link[rel='icon']") as HTMLLinkElement;
 
   if (link) {
-    link.href = FAVICON;  // Caminho do novo favicon
+    link.href = FAVICON;
   }
 };
 
@@ -38,8 +38,8 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     { id: 1, name: 'Logo de DVD', img: DVD, desc: 'A cada colisão você ganha 1 estímulo', cost: 5, unlocked: false, quantity: 0 },
     { id: 2, name: 'Duplos Cliques', img: DOUBLE, desc: 'Seus cliques agora dão o dobro de estímulos!', cost: 10, unlocked: false, quantity: -2 },
     { id: 3, name: 'Botão melhorado', img: BUTTON, desc: 'Deixe seu botão mais bonito ( ͡° ͜ʖ ͡°)', cost: 20, unlocked: false, quantity: -2 },
-    { id: 4, name: 'Ícone do Site', img: FAVICON, desc: 'Adicione um Favicon no seu site!', cost: 30, unlocked: false, quantity: -2},
-    { id: 5, name: 'Subway Surfers', img: SUBWAY, desc: '+5 estímulos por segundo!', cost: 60, unlocked: false, quantity: -2},
+    { id: 4, name: 'Ícone do Site', img: FAVICON, desc: 'Adicione um Favicon no seu site!', cost: 30, unlocked: false, quantity: -2 },
+    { id: 5, name: 'Subway Surfers', img: SUBWAY, desc: '+5 estímulos por segundo!', cost: 60, unlocked: false, quantity: -2 },
   ]);
 
   const { clicks, setMultiplier, startAutoClicks } = useClicks();
@@ -112,7 +112,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         return false;
       }
 
-      // Items que aumentam preço
+      // Items que duplicam o preço
       if (item.id === 1) {
         if (clicks >= cost && item.unlocked) {
           setItems((prevItems) =>
@@ -122,7 +122,6 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
                 : i
             )
           );
-
           return true;
         }
       }
@@ -134,7 +133,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       }
     }
 
-    return false; // Não conseguiu comprar o item
+    return false;
   };
 
   return (

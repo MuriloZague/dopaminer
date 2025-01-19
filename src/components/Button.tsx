@@ -12,7 +12,6 @@ export default function Button() {
     return (
 
         <div className="flex flex-col items-center mb-10">
-
                 <div className={upgradeCheker ? "flex-button-container" : ""}>
                     <div className={upgradeCheker ? "neo-button" : ""} onClick={manualClick}>
                         <button className="bg-[#f0f0f0] border buttonTrans hover:bg-[#ddd] border-[#777] p-1 px-4">
@@ -20,7 +19,6 @@ export default function Button() {
                         </button>
                     </div>
                 </div>
-
             <div className="text-center mt-5">
                 {clicks === 0 ?
                     <p className="inter-tight opacity-0 text-2xl">
@@ -33,6 +31,5 @@ export default function Button() {
                 }
             </div>
         </div>
-
     );
 }

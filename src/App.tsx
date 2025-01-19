@@ -37,9 +37,10 @@ function App() {
   const subChecker = subWay?.quantity === -1
 
   return (
+
     <section className="relative h-screen w-screen">
       <svg width={windowSize.width} height={windowSize.height} className="absolute inset-0 -z-10 w-full h-full">
-      {Array.from({ length: quantityDVD }).map((_, index) => (
+        {Array.from({ length: quantityDVD }).map((_, index) => (
           <DVDLogo
             key={index}
             width={windowSize.width}
@@ -60,7 +61,7 @@ function App() {
         </div>
       </div>
       <div className={subChecker ? '' : 'hidden'}>
-        <Subway/>
+        <Subway />
       </div>
       <Footer />
     </section>
