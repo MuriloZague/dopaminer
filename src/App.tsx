@@ -5,7 +5,6 @@ import Button from "./components/Button";
 import DVDLogo from "./components/DVDLogo";
 import Shop from "./components/Shop";
 import Subway from "./components/SubwaySurfers";
-import Footer from "./components/Footer";
 
 function App() {
 
