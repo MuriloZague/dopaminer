@@ -15,13 +15,13 @@ export default function Button() {
                 <div className={upgradeCheker ? "flex-button-container" : ""}>
                     <div className={upgradeCheker ? "neo-button" : ""} onClick={manualClick}>
                         <button className="bg-[#f0f0f0] border buttonTrans hover:bg-[#ddd] border-[#777] p-1 px-4">
-                            <a className="inter-tight text-[1.35rem]">Clique</a>
+                            <a className="select-none inter-tight text-[1.35rem]">Clique</a>
                         </button>
                     </div>
                 </div>
             <div className="text-center mt-5">
                 {clicks === 0 ?
-                    <p className="inter-tight opacity-0 text-2xl">
+                    <p className="select-none inter-tight opacity-0 text-2xl">
                         {clicks}
                     </p>
                     :
