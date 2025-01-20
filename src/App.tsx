@@ -63,7 +63,6 @@ function App() {
       <div className={subChecker ? '' : 'hidden'}>
         <Subway />
       </div>
-      <Footer />
     </section>
   );
 }
