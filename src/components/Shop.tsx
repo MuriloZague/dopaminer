@@ -10,7 +10,7 @@ export default function Shop() {
 
   useEffect(() => {
     items.forEach((item) => {
-      if (clicks >= item.cost && !item.unlocked) {
+      if (clicks*2 >= item.cost && !item.unlocked) {
         unlockItem(item.id);
       }
     });
@@ -19,7 +19,7 @@ export default function Shop() {
   const handlePurchase = (itemId: number, cost: number) => {
     const currentItemIndex = items.findIndex((item) => item.id === itemId);
     if (buyItem(itemId, cost) && reduceClicks(cost)) {
-      // Desbloqueia o próximo item
+      // Desbloqueia o próximo item, se houver
       const nextItem = items[currentItemIndex + 1];
       if (nextItem) {
         unlockItem(nextItem.id);
@@ -28,7 +28,7 @@ export default function Shop() {
   };
 
   const dvdLogo = items.find((item) => item.id === 1);
-  const quantityDVD = dvdLogo?.quantity || 0; // Defina 0 caso a quantidade seja indefinida
+  const quantityDVD = dvdLogo?.quantity || 0;
 
   const maxItems = 3;
 

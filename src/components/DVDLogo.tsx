@@ -4,6 +4,7 @@ interface DVDLogoProps {
   width: number;
   height: number;
   addClick: () => void; // Adicionando a função addClick como uma propriedade
+  dvdUpgradeChecker: boolean
 }
 
 interface DVDLogoState {
@@ -20,13 +21,14 @@ const widthDVDLogo = 150;
 const heightDVDLogo = 72;
 
 class DVDLogo extends Component<DVDLogoProps, DVDLogoState> {
+
   animationFrameId: number | null = null;
 
   constructor(props: DVDLogoProps) {
     super(props);
-  
+
     const randomSpeed = () => (Math.random() < 0.5 ? 1 : -1) * DVDLogo.getRandomNumber(1, 1);
-  
+
     this.state = {
       x: DVDLogo.getRandomNumber(0, this.props.width - widthDVDLogo),
       y: DVDLogo.getRandomNumber(0, this.props.height - heightDVDLogo),
@@ -37,7 +39,7 @@ class DVDLogo extends Component<DVDLogoProps, DVDLogoState> {
       b: DVDLogo.getRandomNumber(100, 256),
     };
   }
-  
+
 
   static getRandomNumber(min: number, max: number): number {
     return Math.random() * (max - min) + min;
@@ -83,13 +85,25 @@ class DVDLogo extends Component<DVDLogoProps, DVDLogoState> {
     if (newX + widthDVDLogo >= width || newX <= 0) {
       newXSpeed = -xSpeed;
       this.setRandomColors();
-      addClick();
+      if (this.props.dvdUpgradeChecker) {
+        for (let i = 0; i < 5; i++) {
+          addClick();
+        }
+      } else {
+        addClick();
+      }
     }
 
     if (newY + heightDVDLogo >= height || newY <= 0) {
       newYSpeed = -ySpeed;
       this.setRandomColors();
-      addClick();
+      if (this.props.dvdUpgradeChecker) {
+        for (let i = 0; i < 5; i++) {
+          addClick();
+        }
+      } else {
+        addClick();
+      }
     }
 
     newX = Math.max(0, Math.min(newX, width - widthDVDLogo));

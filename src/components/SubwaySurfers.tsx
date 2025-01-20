@@ -7,11 +7,11 @@ export default function Subway() {
         autoPlay
         muted
         loop
-        width="220"
+        width="200"
         style={{
           position: 'absolute',
-          bottom: '10px',  // Distância do fundo da tela
-          right: '10px',   // Distância da direita da tela
+          bottom: '0px',
+          right: '10px',
         }}
       >
         <source src={SUBWAYSURFERS} type="video/mp4" />

@@ -6,6 +6,7 @@ import DOUBLE from '../assets/duploclique.png';
 import BUTTON from '../assets/botao.png';
 import FAVICON from '../assets/sitefoto.png'
 import SUBWAY from '../assets/subway-surfers.webp'
+import DVDUPGRADE from '../assets/dvdUpgrade.png'
 
 interface Item {
   id: number;
@@ -40,6 +41,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     { id: 3, name: 'Botão melhorado', img: BUTTON, desc: 'Deixe seu botão mais bonito +1 estímulo por clique!', cost: 20, unlocked: false, quantity: -2 },
     { id: 4, name: 'Ícone do Site', img: FAVICON, desc: 'Adicione um Favicon no seu site!', cost: 30, unlocked: false, quantity: -2 },
     { id: 5, name: 'Subway Surfers', img: SUBWAY, desc: '+5 estímulos por segundo!', cost: 60, unlocked: false, quantity: -2 },
+    { id: 6, name: 'Logo de DVD melhorado', img: DVDUPGRADE, desc: '+5 estímulos por colisão!', cost: 100, unlocked: false, quantity: -2 },
   ]);
 
   const { clicks, setMultiplier, multiplier, startAutoClicks } = useClicks();
@@ -56,6 +58,20 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const item = items.find((item) => item.id === itemId);
 
     if (item) {
+
+      // Lógica DVD
+      if (item.id === 1) {
+        if (clicks >= cost && item.unlocked) {
+          setItems((prevItems) =>
+            prevItems.map((i) =>
+              i.id === itemId
+                ? i.quantity > 4 ? { ...i, quantity: i.quantity + 1, cost: i.cost * 2 } : { ...i, quantity: i.quantity + 1, cost: i.cost + 5 }
+                : i
+            )
+          );
+          return true;
+        }
+      }
 
       // Lógica para "Duplos Cliques"
       if (item.id === 2 && item.quantity === -2) {
@@ -85,20 +101,6 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         return false;
       }
 
-      // Lógica Subway Surfers
-      if (item.id === 5 && item.quantity === -2) {
-        if (clicks >= item.cost) {
-          startAutoClicks(5)
-          setItems((prevItems) =>
-            prevItems.map((i) =>
-              i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
-            )
-          );
-          return true;
-        }
-        return false;
-      }
-
       // Lógica Favicon
       if (item.id === 4 && item.quantity === -2) {
         if (clicks >= item.cost) {
@@ -113,18 +115,31 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         return false;
       }
 
-      // Items que duplicam o preço
-      if (item.id === 1) {
-        if (clicks >= cost && item.unlocked) {
+      // Lógica Subway Surfers
+      if (item.id === 5 && item.quantity === -2) {
+        if (clicks >= item.cost) {
+          startAutoClicks(5)
           setItems((prevItems) =>
             prevItems.map((i) =>
-              i.id === itemId
-                ? i.quantity > 5 ? { ...i, quantity: i.quantity + 1, cost: i.cost * 2 } : { ...i, quantity: i.quantity + 1, cost: i.cost + 5 }
-                : i
+              i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
             )
           );
           return true;
         }
+        return false;
+      }
+
+      // Lógica Button Upgrade
+      if (item.id === 6 && item.quantity === -2) {
+        if (clicks >= item.cost) {
+          setItems((prevItems) =>
+            prevItems.map((i) =>
+              i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
+            )
+          );
+          return true;
+        }
+        return false;
       }
 
       // Items sem lógica

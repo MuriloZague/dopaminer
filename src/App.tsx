@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useClicks } from "./utils/ClicksContext";
 import { useItems } from "./utils/ItemsContext";
+import { useClicks } from "./utils/ClicksContext";
 import Button from "./components/Button";
 import DVDLogo from "./components/DVDLogo";
 import Shop from "./components/Shop";
@@ -9,8 +9,8 @@ import Footer from "./components/Footer";
 
 function App() {
 
-  const { addClick } = useClicks();
   const { items } = useItems();
+  const { addClick } = useClicks();
 
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
@@ -36,6 +36,9 @@ function App() {
   const subWay = items.find((item) => item.id === 5);
   const subChecker = subWay?.quantity === -1
 
+  const dvdUpgrade = items.find((item) => item.id === 6);
+  const dvdUpgradeChecker = dvdUpgrade?.quantity === -1;
+
   return (
 
     <section className="relative h-screen w-screen">
@@ -43,8 +46,9 @@ function App() {
         {Array.from({ length: quantityDVD }).map((_, index) => (
           <DVDLogo
             key={index}
-            width={windowSize.width}
             addClick={addClick}
+            dvdUpgradeChecker={dvdUpgradeChecker}
+            width={windowSize.width}
             height={windowSize.height}
           />
         ))}
