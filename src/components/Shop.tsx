@@ -17,10 +17,13 @@ export default function Shop() {
   }, [clicks, items, unlockItem]);
 
   const handlePurchase = (itemId: number, cost: number) => {
+    const currentItemIndex = items.findIndex((item) => item.id === itemId);
     if (buyItem(itemId, cost) && reduceClicks(cost)) {
-      //compra
-    } else {
-      //sem cliques
+      // Desbloqueia o próximo item
+      const nextItem = items[currentItemIndex + 1];
+      if (nextItem) {
+        unlockItem(nextItem.id);
+      }
     }
   };
 
