@@ -18,6 +18,9 @@ export const ClicksProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [autoClicking, setAutoClicking] = useState<boolean>(false);
   const [clickRate, setClickRate] = useState<number>(0);
 
+  const setMultiplier = (value: number) => {
+    setMultiplierState(value);
+  };
 
   const addClick = () => {
     setClicks((prev) => prev + 1);
@@ -33,10 +36,6 @@ export const ClicksProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       return true;
     }
     return false;
-  };
-
-  const setMultiplier = (value: number) => {
-    setMultiplierState(value);
   };
 
   const startAutoClicks = (rate: number) => {
