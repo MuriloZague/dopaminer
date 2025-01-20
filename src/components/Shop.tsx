@@ -30,11 +30,13 @@ export default function Shop() {
   const dvdLogo = items.find((item) => item.id === 1);
   const quantityDVD = dvdLogo?.quantity || 0; // Defina 0 caso a quantidade seja indefinida
 
+  const maxItems = 3;
+
   return (
 
     <div className="flex flex-col items-center justify-center">
       <div className="flex flex-row items-center gap-3 ">
-        {items.map((item) =>
+        {items.filter((item) => item.unlocked && item.quantity !== -1).slice(0, maxItems).map((item) =>
           item.unlocked && item.quantity !== -1 ?
             (
               item.id === 1 && item.quantity > 0 ? // verificar se é o primeiro item (DVD)

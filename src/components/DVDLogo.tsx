@@ -24,17 +24,20 @@ class DVDLogo extends Component<DVDLogoProps, DVDLogoState> {
 
   constructor(props: DVDLogoProps) {
     super(props);
-
+  
+    const randomSpeed = () => (Math.random() < 0.5 ? 1 : -1) * DVDLogo.getRandomNumber(1, 1);
+  
     this.state = {
       x: DVDLogo.getRandomNumber(0, this.props.width - widthDVDLogo),
       y: DVDLogo.getRandomNumber(0, this.props.height - heightDVDLogo),
-      xSpeed: 1,
-      ySpeed: 1,
+      xSpeed: randomSpeed(),
+      ySpeed: randomSpeed(),
       r: DVDLogo.getRandomNumber(100, 256),
       g: DVDLogo.getRandomNumber(100, 256),
       b: DVDLogo.getRandomNumber(100, 256),
     };
   }
+  
 
   static getRandomNumber(min: number, max: number): number {
     return Math.random() * (max - min) + min;

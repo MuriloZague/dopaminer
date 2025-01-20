@@ -6,6 +6,7 @@
   margin: 0px;
   padding: 0px;
   font-family: sans-serif;
+  user-select: none;
 }
 
 .inter-tight {

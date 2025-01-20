@@ -60,9 +60,11 @@ function App() {
           </div>
         </div>
       </div>
-      <div className={subChecker ? '' : 'hidden'}>
+      {subChecker ? (
         <Subway />
-      </div>
+      ):(
+        null
+      )}
       <Footer />
     </section>
   );

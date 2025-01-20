@@ -35,14 +35,14 @@ const changeFavicon = () => {
 
 export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<Item[]>([
-    { id: 1, name: 'Logo de DVD', img: DVD, desc: 'A cada colisão você ganha 1 estímulo', cost: 5, unlocked: false, quantity: 0 },
+    { id: 1, name: 'Logo de DVD', img: DVD, desc: 'A cada colisão você ganha 1 estímulo', cost: 3, unlocked: false, quantity: 0 },
     { id: 2, name: 'Duplos Cliques', img: DOUBLE, desc: 'Seus cliques agora dão o dobro de estímulos!', cost: 10, unlocked: false, quantity: -2 },
-    { id: 3, name: 'Botão melhorado', img: BUTTON, desc: 'Deixe seu botão mais bonito ( ͡° ͜ʖ ͡°)', cost: 20, unlocked: false, quantity: -2 },
+    { id: 3, name: 'Botão melhorado', img: BUTTON, desc: 'Deixe seu botão mais bonito +1 estímulo por clique!', cost: 20, unlocked: false, quantity: -2 },
     { id: 4, name: 'Ícone do Site', img: FAVICON, desc: 'Adicione um Favicon no seu site!', cost: 30, unlocked: false, quantity: -2 },
     { id: 5, name: 'Subway Surfers', img: SUBWAY, desc: '+5 estímulos por segundo!', cost: 60, unlocked: false, quantity: -2 },
   ]);
 
-  const { clicks, setMultiplier, startAutoClicks } = useClicks();
+  const { clicks, setMultiplier, multiplier, startAutoClicks } = useClicks();
 
   const unlockItem = (itemId: number) => {
     setItems((prevItems) =>
@@ -60,7 +60,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       // Lógica para "Duplos Cliques"
       if (item.id === 2 && item.quantity === -2) {
         if (clicks >= item.cost) {
-          setMultiplier(2);
+          setMultiplier(multiplier + 1);
           setItems((prevItems) =>
             prevItems.map((i) =>
               i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
@@ -74,6 +74,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       // Lógica para "Botão Melhorado"
       if (item.id === 3 && item.quantity === -2) {
         if (clicks >= item.cost) {
+          setMultiplier(multiplier + 1);
           setItems((prevItems) =>
             prevItems.map((i) =>
               i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
@@ -118,7 +119,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
           setItems((prevItems) =>
             prevItems.map((i) =>
               i.id === itemId
-                ? { ...i, quantity: i.quantity + 1, cost: i.cost * 2 }
+                ? i.quantity > 5 ? { ...i, quantity: i.quantity + 1, cost: i.cost * 2 } : { ...i, quantity: i.quantity + 1, cost: i.cost + 5 }
                 : i
             )
           );
