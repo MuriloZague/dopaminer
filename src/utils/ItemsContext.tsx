@@ -44,7 +44,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     { id: 4, name: 'Ícone do Site', img: FAVICON, desc: 'Adicione um Favicon no seu site!', cost: 40, unlocked: false, quantity: -2 },
     { id: 5, name: 'Subway Surfers', img: SUBWAY, desc: '+5 estímulos por segundo!', cost: 100, unlocked: false, quantity: -2 },
     { id: 6, name: 'Logo de DVD melhorado', img: DVDUPGRADE, desc: 'O logo agora muda de cor! +5 estímulos por colisão!', cost: 150, unlocked: false, quantity: -2 },
-    { id: 7, name: 'Prensa Hidráulica', img: PRENSA, desc: '+20 estímulos por segundo!', cost: 200, unlocked: false, quantity: -2 },
+    { id: 7, name: 'Prensa Hidráulica', img: PRENSA, desc: '+10 estímulos por segundo!', cost: 200, unlocked: false, quantity: -2 },
     { id: 8, name: 'LOFI', img: LOFI, desc: 'Relaxe enquanto escuta seu lofi +30 estímulos por segundo!', cost: 400, unlocked: false, quantity: -2 },
   ]);
 
@@ -149,7 +149,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       // Lógica PRENSA
       if (item.id === 7 && item.quantity === -2) {
         if (clicks >= item.cost) {
-          startAutoClicks(20)
+          startAutoClicks(10)
           setItems((prevItems) =>
             prevItems.map((i) =>
               i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
