@@ -8,6 +8,7 @@ import FAVICON from '../assets/sitefoto.png'
 import SUBWAY from '../assets/subway-surfers.webp'
 import DVDUPGRADE from '../assets/dvdUpgrade.png'
 import PRENSA from '../assets/prensa.jpeg'
+import LOFI from '../assets/lofiicon.png'
 
 interface Item {
   id: number;
@@ -44,6 +45,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     { id: 5, name: 'Subway Surfers', img: SUBWAY, desc: '+5 estímulos por segundo!', cost: 100, unlocked: false, quantity: -2 },
     { id: 6, name: 'Logo de DVD melhorado', img: DVDUPGRADE, desc: '+5 estímulos por colisão!', cost: 150, unlocked: false, quantity: -2 },
     { id: 7, name: 'Prensa Hidráulica', img: PRENSA, desc: '+20 estímulos por segundo!', cost: 200, unlocked: false, quantity: -2 },
+    { id: 8, name: 'LOFI', img: LOFI, desc: 'Relaxe enquanto escuta seu lofi +30 estímulos por segundo!', cost: 400, unlocked: false, quantity: -2 },
   ]);
 
   const { clicks, setMultiplier, multiplier, startAutoClicks } = useClicks();
@@ -144,10 +146,23 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         return false;
       }
 
-      // Lógica 
+      // Lógica PRENSA
       if (item.id === 7 && item.quantity === -2) {
         if (clicks >= item.cost) {
           startAutoClicks(20)
+          setItems((prevItems) =>
+            prevItems.map((i) =>
+              i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
+            )
+          );
+          return true;
+        }
+        return false;
+      }
+
+      // Lógica Button Upgrade
+      if (item.id === 8 && item.quantity === -2) {
+        if (clicks >= item.cost) {
           setItems((prevItems) =>
             prevItems.map((i) =>
               i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i

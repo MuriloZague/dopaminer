@@ -6,6 +6,7 @@ import DVDLogo from "./components/DVDLogo";
 import Shop from "./components/Shop";
 import Video from "./components/Videos";
 import Footer from "./components/Footer";
+import MusicPlayer from "./components/MusicPlayer";
 
 function App() {
 
@@ -42,10 +43,16 @@ function App() {
   const dvdUpgrade = items.find((item) => item.id === 6);
   const dvdUpgradeChecker = dvdUpgrade?.quantity === -1;
 
-  return (
+  const lofi = items.find((item) => item.id === 8);
+  const lofiChecker = lofi?.quantity === -1
 
+  return (
     <section className="relative h-screen w-screen">
-      <svg width={windowSize.width} height={windowSize.height} className="absolute inset-0 -z-10 w-full h-full">
+      <svg
+        width={windowSize.width}
+        height={windowSize.height}
+        className="absolute inset-0 -z-10 w-full h-full"
+      >
         {Array.from({ length: quantityDVD }).map((_, index) => (
           <DVDLogo
             key={index}
@@ -67,19 +74,43 @@ function App() {
           </div>
         </div>
       </div>
+
       {subChecker ? (
-        <Video src='https://streamable.com/e/twagjf?autoplay=1&muted=1' height="350" width="200" bottom="0px" right="1rem" left="" />
-      ) : (
-        null
-      )}
+        <Video
+          src="https://streamable.com/e/twagjf?autoplay=1&muted=1"
+          height="350"
+          width="200"
+          bottom="0px"
+          right="1rem"
+          left=""
+        />
+      ) : null}
+
       {pressChecker ? (
-        <Video src='https://streamable.com/e/6amkk0?autoplay=1&muted=1&nocontrols=1' height="350" width="420" bottom="-3.5rem" right="" left="1rem" />
+        <Video
+          src="https://streamable.com/e/6amkk0?autoplay=1&muted=1&nocontrols=1"
+          height="350"
+          width="420"
+          bottom="-3.5rem"
+          right=""
+          left="1rem"
+        />
+      ) : null}
+
+      {lofiChecker ? (
+        <div className="fixed bottom-11 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
+          <div className="pointer-events-auto text-center">
+            <MusicPlayer />
+          </div>
+        </div>
       ) : (
         null
       )}
+
       <Footer />
     </section>
   );
+
 }
 
 export default App;

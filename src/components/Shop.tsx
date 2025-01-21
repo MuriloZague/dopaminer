@@ -30,7 +30,7 @@ export default function Shop() {
   const dvdLogo = items.find((item) => item.id === 1);
   const quantityDVD = dvdLogo?.quantity || 0;
 
-  const maxItems = 3;
+  const maxItems = 4;
 
   return (
 

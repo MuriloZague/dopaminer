@@ -34,9 +34,9 @@ class DVDLogo extends Component<DVDLogoProps, DVDLogoState> {
       y: DVDLogo.getRandomNumber(0, this.props.height - heightDVDLogo),
       xSpeed: randomSpeed(),
       ySpeed: randomSpeed(),
-      r: DVDLogo.getRandomNumber(100, 256),
-      g: DVDLogo.getRandomNumber(100, 256),
-      b: DVDLogo.getRandomNumber(100, 256),
+      r: 0,
+      g: 0,
+      b: 0,
     };
   }
 
@@ -84,7 +84,7 @@ class DVDLogo extends Component<DVDLogoProps, DVDLogoState> {
     //Colisões
     if (newX + widthDVDLogo >= width || newX <= 0) {
       newXSpeed = -xSpeed;
-      this.setRandomColors();
+      //this.setRandomColors();
       if (this.props.dvdUpgradeChecker) {
         for (let i = 0; i < 5; i++) {
           addClick();
@@ -96,7 +96,7 @@ class DVDLogo extends Component<DVDLogoProps, DVDLogoState> {
 
     if (newY + heightDVDLogo >= height || newY <= 0) {
       newYSpeed = -ySpeed;
-      this.setRandomColors();
+      //this.setRandomColors();
       if (this.props.dvdUpgradeChecker) {
         for (let i = 0; i < 5; i++) {
           addClick();

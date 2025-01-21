@@ -35,7 +35,7 @@
   box-shadow: 10px 10px 20px rgba(187, 186, 187, 0.6), -10px -10px 30px 10px rgba(255, 255, 255, 0.5);
   transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
               background-color 0.5s ease, 
-              box-shadow 0.5s ease; /* Transição para a cor de fundo e a sombra */
+              box-shadow 0.5s ease;
 }
 
 .neo-button button {
@@ -43,7 +43,7 @@
   background-color: transparent;
   font-size: 20px;
   outline: none;
-  transition: background-color 0.3s ease; /* Adicionando transição para o botão */
+  transition: background-color 0.3s ease;
 }
 
 .neo-button:active {
@@ -55,6 +55,10 @@
   transition: .3s ease-out, font-size .3s ease-out, transform .1s ease-out;
 }
 
+.asaa{
+  background-color: rgba(255, 255, 255, 0.363);
+  border-color: #e5e7eba4;
+}
 
 .upgradeTolltip {
   transition: opacity .2s linear
