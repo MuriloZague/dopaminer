@@ -29,7 +29,6 @@ export default function MusicPlayer() {
     },
   ];
 
-  // Função para alternar reprodução/pausa
   const togglePlayPause = () => {
     if (audioRef.current) {
       if (isPlaying) {
@@ -50,17 +49,17 @@ export default function MusicPlayer() {
     setCurrentTrackIndex((prevIndex) =>
       prevIndex === tracks.length - 1 ? 0 : prevIndex + 1
     );
-    setIsPlaying(false); // Para a reprodução ao mudar de música
+    setIsPlaying(false);
   };
 
   const prevTrack = () => {
     setCurrentTrackIndex((prevIndex) =>
       prevIndex === 0 ? tracks.length - 1 : prevIndex - 1
     );
-    setIsPlaying(false); // Para a reprodução ao mudar de música
+    setIsPlaying(false);
   };
 
-  const volume = 0.35;
+  const volume = 0.3;
 
   useEffect(() => {
     if (audioRef.current) {
@@ -69,16 +68,16 @@ export default function MusicPlayer() {
   }, [volume]);
 
   return (
-    <div className="music-player px-4 py-[0.10rem] h-52 rounded-md border shadow-lg">
+    <div className="music-player px-4 py-[0.10rem] h-52 rounded-md border shadow-lg" style={{ "backgroundColor": "rgba(255, 255, 255, 0.6)", "borderColor": "#e5e7eba4" }}>
       <h2 className="text-base py-2">
-      <a href={tracks[currentTrackIndex].href} target="_blank">
-      🎵 {tracks[currentTrackIndex].title}
-      </a>
+        <a href={tracks[currentTrackIndex].href} target="_blank">
+          🎵 {tracks[currentTrackIndex].title}
+        </a>
       </h2>
       <audio
         ref={audioRef}
         src={tracks[currentTrackIndex].src}
-        onEnded={() => nextTrack()} // Avança automaticamente após terminar
+        onEnded={() => nextTrack()}
       />
       <div className="flex space-x-3">
         <button
