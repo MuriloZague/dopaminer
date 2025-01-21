@@ -43,7 +43,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     { id: 3, name: 'Botão melhorado', img: BUTTON, desc: 'Deixe seu botão mais bonito +1 estímulo por clique!', cost: 25, unlocked: false, quantity: -2 },
     { id: 4, name: 'Ícone do Site', img: FAVICON, desc: 'Adicione um Favicon no seu site!', cost: 40, unlocked: false, quantity: -2 },
     { id: 5, name: 'Subway Surfers', img: SUBWAY, desc: '+5 estímulos por segundo!', cost: 100, unlocked: false, quantity: -2 },
-    { id: 6, name: 'Logo de DVD melhorado', img: DVDUPGRADE, desc: '+5 estímulos por colisão!', cost: 150, unlocked: false, quantity: -2 },
+    { id: 6, name: 'Logo de DVD melhorado', img: DVDUPGRADE, desc: 'O logo agora muda de cor! +5 estímulos por colisão!', cost: 150, unlocked: false, quantity: -2 },
     { id: 7, name: 'Prensa Hidráulica', img: PRENSA, desc: '+20 estímulos por segundo!', cost: 200, unlocked: false, quantity: -2 },
     { id: 8, name: 'LOFI', img: LOFI, desc: 'Relaxe enquanto escuta seu lofi +30 estímulos por segundo!', cost: 400, unlocked: false, quantity: -2 },
   ]);

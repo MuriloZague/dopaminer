@@ -84,8 +84,8 @@ class DVDLogo extends Component<DVDLogoProps, DVDLogoState> {
     //Colisões
     if (newX + widthDVDLogo >= width || newX <= 0) {
       newXSpeed = -xSpeed;
-      //this.setRandomColors();
       if (this.props.dvdUpgradeChecker) {
+        this.setRandomColors();
         for (let i = 0; i < 5; i++) {
           addClick();
         }
@@ -96,8 +96,8 @@ class DVDLogo extends Component<DVDLogoProps, DVDLogoState> {
 
     if (newY + heightDVDLogo >= height || newY <= 0) {
       newYSpeed = -ySpeed;
-      //this.setRandomColors();
       if (this.props.dvdUpgradeChecker) {
+        this.setRandomColors();
         for (let i = 0; i < 5; i++) {
           addClick();
         }
