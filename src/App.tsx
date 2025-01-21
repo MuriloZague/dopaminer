@@ -89,9 +89,9 @@ function App() {
       {pressChecker ? (
         <Video
           src="https://streamable.com/e/6amkk0?autoplay=1&muted=1&nocontrols=1"
-          height="350"
+          height="235"
           width="420"
-          bottom="-3.5rem"
+          bottom="0px"
           right=""
           left="1rem"
         />
