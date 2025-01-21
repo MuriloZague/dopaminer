@@ -1,74 +1,106 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import LOFI from '../assets/lofi.gif'
+
+//musicas
+import WYS from "../assets/music/WYS.mp3";
+import YOU from '../assets/music/you.mp3'
+import PM from '../assets/music/532pm.mp3'
 
 export default function MusicPlayer() {
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0); // Índice da música atual
-  const audioRef = useRef<HTMLAudioElement>(null); // Referência ao elemento <audio>
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Lista de músicas
   const tracks = [
     {
-      title: "Pinwheel",
-      src: "/music/pinwheel.mp3", // Caminho da música
+      title: "Snowman",
+      src: WYS,
+      href: "https://open.spotify.com/intl-pt/track/5oKzIi5OFGRD8f2oGaHLtj?si=b787f7dead7848ff",
     },
     {
-      title: "Sunrise",
-      src: "/music/sunrise.mp3",
+      title: "Thinking of You",
+      src: YOU,
+      href: "https://open.spotify.com/intl-pt/track/2pZi2b9U8r20AF0Cf3hi2D?si=ca3f43a3c4d54c60",
     },
     {
-      title: "Rainforest",
-      src: "/music/rainforest.mp3",
+      title: "5:32pm",
+      src: PM,
+      href: "https://open.spotify.com/intl-pt/track/7qrBYrivpvfXUPBMmqh3dA?si=d284346b41b34bb0",
     },
   ];
 
-  // Função para ir para a próxima música
+  // Função para alternar reprodução/pausa
+  const togglePlayPause = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        audioRef.current
+          .play()
+          .then(() => setIsPlaying(true))
+          .catch((err) =>
+            console.error("Erro ao tentar reproduzir a música:", err)
+          );
+      }
+    }
+  };
+
   const nextTrack = () => {
     setCurrentTrackIndex((prevIndex) =>
       prevIndex === tracks.length - 1 ? 0 : prevIndex + 1
     );
+    setIsPlaying(false); // Para a reprodução ao mudar de música
   };
 
-  // Função para voltar para a música anterior
   const prevTrack = () => {
     setCurrentTrackIndex((prevIndex) =>
       prevIndex === 0 ? tracks.length - 1 : prevIndex - 1
     );
+    setIsPlaying(false); // Para a reprodução ao mudar de música
   };
 
-  // Atualiza a música no <audio> quando o índice mudar
-  const handlePlay = () => {
+  const volume = 0.35;
+
+  useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.load(); // Recarrega o elemento <audio> com a nova música
-      audioRef.current.play(); // Inicia a reprodução
+      audioRef.current.volume = volume;
     }
-  };
+  }, [volume]);
 
   return (
-    <div className="music-player flex flex-col items-center p-4 border rounded-md">
-      <h2 className="text-lg font-bold mb-2">
-        🎵 {tracks[currentTrackIndex].title}
+    <div className="music-player px-4 py-[0.10rem] h-52 rounded-md border shadow-lg">
+      <h2 className="text-base py-2">
+      <a href={tracks[currentTrackIndex].href} target="_blank">
+      🎵 {tracks[currentTrackIndex].title}
+      </a>
       </h2>
       <audio
         ref={audioRef}
-        onLoadedMetadata={handlePlay} // Reproduz quando carregar
-        controls
-      >
-        <source src={tracks[currentTrackIndex].src} type="audio/mpeg" />
-        Seu navegador não suporta o player de áudio.
-      </audio>
-      <div className="controls flex mt-2 space-x-4">
+        src={tracks[currentTrackIndex].src}
+        onEnded={() => nextTrack()} // Avança automaticamente após terminar
+      />
+      <div className="flex space-x-3">
         <button
           onClick={prevTrack}
           className="p-2 bg-gray-200 rounded hover:bg-gray-300"
         >
-          ⏪ Anterior
+          ⏪
+        </button>
+        <button
+          onClick={togglePlayPause}
+          className="p-2 bg-gray-200 rounded hover:bg-gray-300"
+        >
+          {isPlaying ? "⏸️" : "▶️"}
         </button>
         <button
           onClick={nextTrack}
           className="p-2 bg-gray-200 rounded hover:bg-gray-300"
         >
-          ⏩ Próxima
+          ⏩
         </button>
       </div>
+      <img src={LOFI} className="m-auto mt-1" width={120} alt="" />
     </div>
   );
 }
