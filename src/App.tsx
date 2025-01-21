@@ -4,7 +4,7 @@ import { useClicks } from "./utils/ClicksContext";
 import Button from "./components/Button";
 import DVDLogo from "./components/DVDLogo";
 import Shop from "./components/Shop";
-import Subway from "./components/SubwaySurfers";
+import Subway from "./components/Videos";
 import Footer from "./components/Footer";
 
 function App() {
@@ -65,8 +65,8 @@ function App() {
         </div>
       </div>
       {subChecker ? (
-        <Subway />
-      ):(
+        <Subway src='https://streamable.com/e/twagjf?autoplay=1&muted=1' height="350" width="200" bottom="0" right="10" />
+      ) : (
         null
       )}
       <Footer />
