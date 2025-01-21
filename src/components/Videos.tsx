@@ -3,10 +3,11 @@ interface VideoProps {
   height: string;
   bottom: string;
   right: string;
+  left: string;
   src: string;
 }
 
-export default function Videos({ width, height, bottom, right, src }: VideoProps) {
+export default function Videos({ width, height, bottom, right, left, src }: VideoProps) {
   return (
     <div style={{ position: 'relative' }}>
       <iframe
@@ -16,8 +17,9 @@ export default function Videos({ width, height, bottom, right, src }: VideoProps
         allow="autoplay; muted"
         style={{
           position: 'absolute',
-          bottom:`${bottom}px`,
-          right:`${right}px`,
+          bottom:`${bottom}`,
+          right:`${right}`,
+          left: `${left}`
         }}
       ></iframe>
     </div>

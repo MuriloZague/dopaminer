@@ -4,7 +4,7 @@ import { useClicks } from "./utils/ClicksContext";
 import Button from "./components/Button";
 import DVDLogo from "./components/DVDLogo";
 import Shop from "./components/Shop";
-import Subway from "./components/Videos";
+import Video from "./components/Videos";
 import Footer from "./components/Footer";
 
 function App() {
@@ -36,6 +36,9 @@ function App() {
   const subWay = items.find((item) => item.id === 5);
   const subChecker = subWay?.quantity === -1
 
+  const hidricPress = items.find((item) => item.id === 7);
+  const pressChecker = hidricPress?.quantity === -1
+
   const dvdUpgrade = items.find((item) => item.id === 6);
   const dvdUpgradeChecker = dvdUpgrade?.quantity === -1;
 
@@ -65,7 +68,12 @@ function App() {
         </div>
       </div>
       {subChecker ? (
-        <Subway src='https://streamable.com/e/twagjf?autoplay=1&muted=1' height="350" width="200" bottom="0" right="10" />
+        <Video src='https://streamable.com/e/twagjf?autoplay=1&muted=1' height="350" width="200" bottom="0px" right="1rem" left="" />
+      ) : (
+        null
+      )}
+      {pressChecker ? (
+        <Video src='https://streamable.com/e/6amkk0?autoplay=1&muted=1&nocontrols=1' height="350" width="420" bottom="-3.5rem" right="" left="1rem" />
       ) : (
         null
       )}
