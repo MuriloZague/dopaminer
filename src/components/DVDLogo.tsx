@@ -34,12 +34,11 @@ class DVDLogo extends Component<DVDLogoProps, DVDLogoState> {
       y: DVDLogo.getRandomNumber(0, this.props.height - heightDVDLogo),
       xSpeed: randomSpeed(),
       ySpeed: randomSpeed(),
-      r: 0,
-      g: 0,
-      b: 0,
+      r: this.props.dvdUpgradeChecker ? DVDLogo.getRandomNumber(100, 256) : 0,
+      g: this.props.dvdUpgradeChecker ? DVDLogo.getRandomNumber(100, 256) : 0,
+      b: this.props.dvdUpgradeChecker ? DVDLogo.getRandomNumber(100, 256) : 0,
     };
   }
-
 
   static getRandomNumber(min: number, max: number): number {
     return Math.random() * (max - min) + min;
