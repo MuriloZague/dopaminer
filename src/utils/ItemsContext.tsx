@@ -53,17 +53,20 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   const [isLofiActive, setIsLofiActive] = useState(false);
 
+  const [totalAutoClicks, setTotalAutoClicks] = useState(0);
+
   const { isPlaying } = useMusicStore();
 
   useEffect(() => {
     if (isLofiActive) {
-      if (isPlaying) {
-        startAutoClicks(15);
-      } else {
-        startAutoClicks(0);
-      }
+      setTotalAutoClicks((prev) => prev + (isPlaying ? 15 : -15));
     }
   }, [isPlaying, isLofiActive]);
+
+  useEffect(() => {
+    startAutoClicks(totalAutoClicks);
+  }, [totalAutoClicks]);
+  
   
   const unlockItem = (itemId: number) => {
     setItems((prevItems) =>
@@ -137,7 +140,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       // Lógica Subway Surfers
       if (item.id === 5 && item.quantity === -2) {
         if (clicks >= item.cost) {
-          startAutoClicks(5)
+          setTotalAutoClicks((prev) => prev + 5);
           setItems((prevItems) =>
             prevItems.map((i) =>
               i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
@@ -164,7 +167,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       // Lógica PRENSA
       if (item.id === 7 && item.quantity === -2) {
         if (clicks >= item.cost) {
-          startAutoClicks(10)
+          setTotalAutoClicks((prev) => prev + 10);
           setItems((prevItems) =>
             prevItems.map((i) =>
               i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
