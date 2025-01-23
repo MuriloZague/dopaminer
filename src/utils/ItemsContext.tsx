@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useClicks } from './ClicksContext';
+import { useMusicStore } from './MusicStore';
 
 import DVD from '../assets/dvd-logo.svg';
 import DOUBLE from '../assets/duploclique.png';
@@ -17,7 +18,7 @@ interface Item {
   desc: string;
   cost: number;
   unlocked: boolean;
-  quantity: number; // Cada item tem uma quantidade
+  quantity: number;
 }
 
 interface ItemsContextType {
@@ -45,11 +46,25 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     { id: 5, name: 'Subway Surfers', img: SUBWAY, desc: '+5 estímulos por segundo!', cost: 100, unlocked: false, quantity: -2 },
     { id: 6, name: 'Logo de DVD melhorado', img: DVDUPGRADE, desc: 'O logo agora muda de cor! +5 estímulos por colisão!', cost: 150, unlocked: false, quantity: -2 },
     { id: 7, name: 'Prensa Hidráulica', img: PRENSA, desc: '+10 estímulos por segundo!', cost: 200, unlocked: false, quantity: -2 },
-    { id: 8, name: 'LOFI', img: LOFI, desc: 'Relaxe enquanto escuta seu lofi +30 estímulos por segundo!', cost: 400, unlocked: false, quantity: -2 },
+    { id: 8, name: 'LOFI', img: LOFI, desc: 'Relaxe enquanto escuta seu lofi +15 estímulos por segundo!', cost: 400, unlocked: false, quantity: -2 },
   ]);
 
   const { clicks, setMultiplier, multiplier, startAutoClicks } = useClicks();
 
+  const [isLofiActive, setIsLofiActive] = useState(false);
+
+  const { isPlaying } = useMusicStore();
+
+  useEffect(() => {
+    if (isLofiActive) {
+      if (isPlaying) {
+        startAutoClicks(15);
+      } else {
+        startAutoClicks(0);
+      }
+    }
+  }, [isPlaying, isLofiActive]);
+  
   const unlockItem = (itemId: number) => {
     setItems((prevItems) =>
       prevItems.map((item) =>
@@ -160,9 +175,10 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         return false;
       }
 
-      // Lógica Button Upgrade
+      // Lógica LOFI
       if (item.id === 8 && item.quantity === -2) {
         if (clicks >= item.cost) {
+          setIsLofiActive(true);
           setItems((prevItems) =>
             prevItems.map((i) =>
               i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i

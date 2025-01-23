@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useMusicStore } from "../utils/MusicStore";
 import LOFI from '../assets/lofi.gif'
 
 //musicas
@@ -8,7 +9,7 @@ import PM from '../assets/music/532pm.mp3'
 
 export default function MusicPlayer() {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { isPlaying, setPlaying } = useMusicStore();
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const tracks = [
@@ -30,14 +31,15 @@ export default function MusicPlayer() {
   ];
 
   const togglePlayPause = () => {
+    
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
-        setIsPlaying(false);
+        setPlaying(false);
       } else {
         audioRef.current
           .play()
-          .then(() => setIsPlaying(true))
+          .then(() => setPlaying(true))
           .catch((err) =>
             console.error("Erro ao tentar reproduzir a música:", err)
           );
@@ -49,14 +51,14 @@ export default function MusicPlayer() {
     setCurrentTrackIndex((prevIndex) =>
       prevIndex === tracks.length - 1 ? 0 : prevIndex + 1
     );
-    setIsPlaying(false);
+    setPlaying(false);
   };
 
   const prevTrack = () => {
     setCurrentTrackIndex((prevIndex) =>
       prevIndex === 0 ? tracks.length - 1 : prevIndex - 1
     );
-    setIsPlaying(false);
+    setPlaying(false);
   };
 
   const volume = 0.3;
