@@ -37,6 +37,14 @@ const changeFavicon = () => {
   }
 };
 
+const changeBackground = () => {
+  const body = document.querySelector('body');
+
+  if (body) {
+    body.style.backgroundColor = '#000';
+  }
+}
+
 export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<Item[]>([
     { id: 1, name: 'Logo de DVD', img: DVD, desc: 'A cada colisão você ganha 1 estímulo', cost: 3, unlocked: false, quantity: 0 },
@@ -154,6 +162,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       // Lógica Button Upgrade
       if (item.id === 6 && item.quantity === -2) {
         if (clicks >= item.cost) {
+          changeBackground();
           setItems((prevItems) =>
             prevItems.map((i) =>
               i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
