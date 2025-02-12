@@ -3,7 +3,7 @@ import { useItems } from "../utils/ItemsContext";
 
 export default function Button() {
   const { clicks, manualClick } = useClicks();
-  const { items } = useItems();
+  const { items, darkMode } = useItems();
 
   const buttonUpgrade = items.find((item) => item.id === 3);
   const upgradeCheker = buttonUpgrade?.quantity === -1;
@@ -28,10 +28,14 @@ export default function Button() {
             {clicks}
           </p>
         ) : (
-          <p className="inter-tight transition-opacity duration-500 text-2xl">
-            {clicks} estímulos
-          </p>
-        )}
+          <p className={`
+            transition-opacity duration-500 text-2xl 
+            ${darkMode ? "inter-tight-white" : "inter-tight"}
+          `}
+        >
+          {clicks} estímulos
+        </p>
+          )}
       </div>
     </div>
   );

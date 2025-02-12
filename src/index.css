@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  transition: background-color 1s ease;
+}
+
 * {
   margin: 0px;
   padding: 0px;
@@ -11,6 +15,14 @@
 
 .inter-tight {
   color: black;
+  font-family: "Inter Tight", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.inter-tight-white {
+  color: white;
   font-family: "Inter Tight", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
