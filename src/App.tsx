@@ -7,11 +7,13 @@ import Shop from "./components/Shop";
 import Video from "./components/Videos";
 import Footer from "./components/Footer";
 import MusicPlayer from "./components/MusicPlayer";
+import Lamp from "./components/Lamp";
 
 function App() {
 
-  const { items } = useItems();
+  const { items, turnOffDarkMode, turnOnDarkMode } = useItems();
   const { addClick } = useClicks();
+  const [active, setActive] = useState(true);
 
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
@@ -31,6 +33,19 @@ function App() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    if (active) {
+      turnOffDarkMode();
+    } else {
+      turnOnDarkMode();
+    }
+  }, [active, turnOffDarkMode, turnOnDarkMode]);
+
+  const activateLamp = () => {
+    setActive(!active);
+    console.log("Lamp toggled. Dark mode updated.");
+  };
+
   const dvdLogo = items.find((item) => item.id === 1);
   const quantityDVD = dvdLogo?.quantity || 0
 
@@ -45,6 +60,9 @@ function App() {
 
   const lofi = items.find((item) => item.id === 9);
   const lofiChecker = lofi?.quantity === -1
+
+  const lamp = items.find((item) => item.id === 8);
+  const lampChecker = lamp?.quantity === -1
 
   return (
     <section className="relative h-screen w-screen">
@@ -63,6 +81,12 @@ function App() {
           />
         ))}
       </svg>
+
+      {lampChecker && (
+        <div className="fixed z-50 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <Lamp lampOn={active} setLampOn={activateLamp} />
+        </div>
+      )}
 
       <div className="relative z-10 flex justify-center items-center h-[97%]">
         <div className="transform -translate-y-10">

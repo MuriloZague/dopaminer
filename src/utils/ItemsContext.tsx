@@ -26,6 +26,9 @@ interface ItemsContextType {
   items: Item[];
   unlockItem: (itemId: number) => void;
   buyItem: (itemId: number, cost: number) => boolean;
+  turnOffDarkMode: () => void;
+  turnOnDarkMode: () => void;
+  darkMode: boolean;
 }
 
 const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
@@ -37,14 +40,6 @@ const changeFavicon = () => {
     link.href = FAVICON;
   }
 };
-
-const changeBackground = () => {
-  const body = document.querySelector('body');
-
-  if (body) {
-    body.style.backgroundColor = '#000';
-  }
-}
 
 export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<Item[]>([
@@ -66,6 +61,27 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [totalAutoClicks, setTotalAutoClicks] = useState(0);
 
   const { isPlaying } = useMusicStore();
+
+  const [darkMode, setDarkMode] = useState(false);
+
+
+  const changeBackground = (active: boolean) => {
+    const body = document.querySelector('body');
+  
+    if (body) {
+      body.style.backgroundColor = active ? '#000' : '#fff';
+    }
+  }
+
+  const turnOffDarkMode = () => {
+    changeBackground(false);
+    setDarkMode(false);
+  };
+
+  const turnOnDarkMode = () => {
+    changeBackground(true);
+    setDarkMode(true);
+  };
 
   useEffect(() => {
     if (isLofiActive) {
@@ -192,7 +208,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       // Lógica BACKGROUND CHANGE
       if (item.id === 8 && item.quantity === -2) {
         if (clicks >= item.cost) {
-          changeBackground();
+          changeBackground(true);
           setItems((prevItems) =>
             prevItems.map((i) =>
               i.id === itemId ? { ...i, unlocked: false, quantity: -1 } : i
@@ -228,12 +244,11 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   };
 
   return (
-    <ItemsContext.Provider value={{ items, unlockItem, buyItem }}>
+    <ItemsContext.Provider value={{ items, unlockItem, buyItem, turnOffDarkMode, turnOnDarkMode, darkMode }}>
       {children}
     </ItemsContext.Provider>
   );
 };
-
 export const useItems = () => {
   const context = useContext(ItemsContext);
   if (!context) {

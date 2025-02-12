@@ -3,13 +3,10 @@ import { useItems } from "../utils/ItemsContext";
 
 export default function Button() {
   const { clicks, manualClick } = useClicks();
-  const { items } = useItems();
+  const { items, darkMode } = useItems();
 
   const buttonUpgrade = items.find((item) => item.id === 3);
   const upgradeCheker = buttonUpgrade?.quantity === -1;
-
-  const bg = items.find((item) => item.id === 8);
-  const bgChecker = bg?.quantity === -1
 
   return (
     <div className="flex flex-col items-center mb-10">
@@ -31,16 +28,14 @@ export default function Button() {
             {clicks}
           </p>
         ) : (
-          bgChecker ? (
-            <p className="inter-tight-white transition-opacity duration-500 text-2xl">
-              {clicks} estímulos
-            </p>
-          ) : (
-            <p className="inter-tight transition-opacity duration-500 text-2xl">
-              {clicks} estímulos
-            </p>
-          )
-        )}
+          <p className={`
+            transition-opacity duration-500 text-2xl 
+            ${darkMode ? "inter-tight-white" : "inter-tight"}
+          `}
+        >
+          {clicks} estímulos
+        </p>
+          )}
       </div>
     </div>
   );
