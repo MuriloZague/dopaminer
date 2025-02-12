@@ -8,6 +8,9 @@ export default function Button() {
   const buttonUpgrade = items.find((item) => item.id === 3);
   const upgradeCheker = buttonUpgrade?.quantity === -1;
 
+  const bg = items.find((item) => item.id === 8);
+  const bgChecker = bg?.quantity === -1
+
   return (
     <div className="flex flex-col items-center mb-10">
       <div
@@ -28,9 +31,15 @@ export default function Button() {
             {clicks}
           </p>
         ) : (
-          <p className="inter-tight transition-opacity duration-500 text-2xl">
-            {clicks} estímulos
-          </p>
+          bgChecker ? (
+            <p className="inter-tight-white transition-opacity duration-500 text-2xl">
+              {clicks} estímulos
+            </p>
+          ) : (
+            <p className="inter-tight transition-opacity duration-500 text-2xl">
+              {clicks} estímulos
+            </p>
+          )
         )}
       </div>
     </div>

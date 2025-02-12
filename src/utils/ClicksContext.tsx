@@ -13,7 +13,7 @@ interface ClickContextType {
 const ClicksContext = createContext<ClickContextType | undefined>(undefined);
 
 export const ClicksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [clicks, setClicks] = useState<number>(0);
+  const [clicks, setClicks] = useState<number>(999);
   const [multiplier, setMultiplierState] = useState<number>(1);
   const [autoClicking, setAutoClicking] = useState<boolean>(false);
   const [clickRate, setClickRate] = useState<number>(0);
