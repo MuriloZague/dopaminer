@@ -43,7 +43,7 @@ function App() {
   const dvdUpgrade = items.find((item) => item.id === 6);
   const dvdUpgradeChecker = dvdUpgrade?.quantity === -1;
 
-  const lofi = items.find((item) => item.id === 8);
+  const lofi = items.find((item) => item.id === 9);
   const lofiChecker = lofi?.quantity === -1
 
   return (
