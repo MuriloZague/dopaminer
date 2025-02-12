@@ -65,7 +65,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   useEffect(() => {
     startAutoClicks(totalAutoClicks);
-  }, [totalAutoClicks]);
+  }, [totalAutoClicks, startAutoClicks]);
   
   
   const unlockItem = (itemId: number) => {
