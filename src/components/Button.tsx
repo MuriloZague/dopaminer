@@ -33,7 +33,7 @@ export default function Button() {
             ${darkMode ? "inter-tight-white" : "inter-tight"}
           `}
         >
-          {clicks} estímulos
+          {clicks} dopamina
         </p>
           )}
       </div>
